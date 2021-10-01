@@ -1,0 +1,57 @@
+int LightRed = 8;
+int LightYellow = 7;
+int LightGreen = 4;
+int Button = 13;
+bool IsButtonUp;
+bool WasButtonUp = true;
+bool Start = false;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(LightRed, OUTPUT);
+  pinMode(LightYellow, OUTPUT);
+  pinMode(LightGreen, OUTPUT);
+  pinMode(Button, INPUT);
+
+  
+}
+
+void loop() {
+
+  IsButtonUp = digitalRead(Button);
+  Serial.println(IsButtonUp);
+  
+  if (IsButtonUp)
+    {
+      Start = true;
+    }
+  else
+  Start = false;
+
+  if (Start == true)
+  {
+  digitalWrite(LightGreen, LOW);
+  digitalWrite(LightYellow, LOW);
+  digitalWrite(LightRed, HIGH);
+  delay(10000);
+  digitalWrite(LightYellow, HIGH);
+  delay(1500);
+  digitalWrite(LightRed, LOW);
+  digitalWrite(LightYellow, LOW);
+  delay(200);
+  digitalWrite(LightGreen, HIGH);
+  delay(10000);
+
+  for(int i = 0;i < 2;i++) {
+  digitalWrite(LightGreen, LOW);
+  delay(500);
+  digitalWrite(LightGreen, HIGH);
+  delay(500);
+  }
+  digitalWrite(LightGreen, LOW);
+  digitalWrite(LightYellow, HIGH);
+  delay(1500);
+  digitalWrite(LightYellow, LOW);
+  Start = false;
+  }
+}
